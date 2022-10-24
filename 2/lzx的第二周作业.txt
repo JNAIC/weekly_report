@@ -1,0 +1,100 @@
+B2002
+print("Hello,World!")
+
+B2025
+print("  *  \n *** \n*****\n *** \n  *  \n")
+
+P1001
+a,b = map(int,input().split())
+c = a + b
+print(c)
+
+B2005
+a = input()
+print("  "+a+"  \n"+" "+a+a+a+" \n"+a+a+a+a+a)
+
+P5703
+a,b = map(int,input().split())
+c = a * b
+print(c)
+
+P5704
+a = input().title()
+print(a)
+
+P5705
+nlist = list(input())
+nlist.reverse()
+print(*nlist,sep='')
+
+P5706
+a,b = map(float,input().split())
+c = a/b
+d = b * 2
+print("%.3f" % c)
+print(format(d,'.0f'))
+
+P5708
+a,b,c = map(float,input().split())
+p = (a + b + c) / 2
+s = (p*(p-a)*(p-b)*(p-c))**0.5
+print(format(s,'.1f'))
+
+P5707 #P的让我再研究一下，交个c的
+#include<stdio.h>
+
+int main(){
+    float s,v,time;
+    int hour,h,m,t;
+    scanf("%f%f",&s,&v);
+    time = s/v;
+    t = s/v;
+    if(time != t)
+        t = time + 11;
+    else t = time + 10;
+    m = t%60;
+    t -= 1;
+    hour = t/60;
+    if(hour>=8)//是否到前一天
+        h = 31 - hour;
+    else h = 7 - hour;
+    printf("%02d:%02d",h,60-m);
+    return 0;
+}
+
+B2029
+h,r = map(int,input().split())
+pi = 3.1415926
+v = pi * r**2 *h
+n = 20000 // v
+if(20%v):
+    n = n+1
+print(format(n,'.0f'))
+
+P1425 #P的让我再研究一下，交个c的
+#include<stdio.h>
+
+int main(){
+    int a,b,c,d;
+    scanf("%d%d%d%d",&a,&b,&c,&d);
+    a = c - a;
+    if(b>d){
+        a -= 1;
+        d += 60;
+    }
+    b = d - b;
+    printf("%d %d",a,b);
+    return 0;
+}
+
+P1421
+y,j = map(int,input().split())
+p = 19
+sum = 10*y + j
+n = sum // p
+print(n)
+
+P3954
+a,b,c = map(int,input().split())
+s = a*0.2 + b*0.3 +c*0.5
+print(format(s,'.0f'))
