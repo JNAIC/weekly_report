@@ -1,0 +1,30 @@
+本周的任务：
+C语言继续夯实基础，写一些基本题
+1.线性回归的知识。
+一个自变量x，一个应变量y，两者之间大致可用一条直线表示，其中（x,y）是大致分布在这条直线两侧的点。
+最小二乘法：估计y=kx+b中的k和b的值。
+其中Y，X表示实际，y，x表示估计
+（Y1-y1）^2+（Y2-y2）^2……（Yn-yn）^2
+可以通过计算损失的大小比较模型的好坏。希望上面的值越小越好，越小说明越准确。（类比方差）
+2.什么是梯度下降法？
+如何快速求解k和b
+求导——切线方向——每次都会减小误差
+数学迭代公式：x^(k+1)=x^k-p*2*累加{(Yi-yi)*xi}   p为步长(由导数推导)
+Anew=Aold-a*g  （g为变化率，a为每次学习后的学习率）
+找最优解，要对学习率（步长）进行合理设置，同时只能找到局部最低
+3.python代码（网络查找,小改/卑微.jpg）
+import pandas as pd
+data=pd.read_txt("C:\Users\86137\Documents\TencentFiles\2260116448\FileRecv\ex1data1.txt")
+import matplotlib.pyplot as plt
+data.plot.scatter(x='1',y='2')
+plt.show()
+from sklearn.linear_model import LinearRegression
+features = data['1'].values.reshape(-1,1)
+target = data['2']
+regression = LinearRegression()
+model = regression.fit(features,target)
+model.predict(10)
+4.因为刚好上了人智导论，认识了一下bp学习算法。
+BP神经网络是一个从输入到输出的非线性映射，其中有m层。第一层是输入层，最后一层是输出层，中间各层为隐层。其中，由k-1层的第j个神经元到第k层的第i个神经元有一个连接权值w，其总和就是一个累加。
+BP定理：给定ɛ>0，对于任意的连续函数f，存在一个三层前向神经网络，它可以在任意ɛ平方误差精度内逼近f。
+也是一个梯度下降法，但是是反向传播？
