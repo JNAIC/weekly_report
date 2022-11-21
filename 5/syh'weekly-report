@@ -1,0 +1,52 @@
+#损失函数：权重，偏差，位置点
+def loss_x(theta,thetazero,points):
+    total_cost=0
+    n=len(points)
+    for i in range(n):
+        x=points[i,0]
+        y=points[i,1]
+        total_cost+=(y-theta*x-thetazero)**2
+
+    return total_cost/2
+#步长函数：计算出每次梯度下降后偏差与权值的变化
+def tidu_step(current_theta,current_theta_zero,alpha,points):
+    sum_theta=0
+    sum_theta_zero=0
+    n=len(points)
+    for i in range(n):
+        x=points[i,0]
+        y=points[i,1]
+        sum_theta+=(current_theta*x+current_theta_zero-y)*x
+        sum_theta_zero+=current_theta*x+current_theta_zero-y
+    now_theta=2/n*sum_theta
+    mow_theta_zero=2/n*sum_theta_zero
+    updated_theta=current_theta-alpha*now*theta
+    updated_theta_zero=current_theta_zero-alpha*now_theta_zero
+return updated_theta,updated_theta_zero
+#主梯度下降过程：（数组，开始x值，开始y值，步长（学习率），总次数限制上限）
+def tidu(points,first_theta,first_theta_zero,alpha,number):
+    theta=first_theta
+    theta_zero=first_theta_zero
+    #保存损失函数值然后能够绘制图像
+    cost_list=[]
+    for i in range(number):
+        cost_list.append(loss_x(theta,theta_zero,points))
+        theta,theta_zero=tidu_step(theta,theta_zero,alpha,points)
+return[theta,theta_zero,cost_list]
+#主函数计算过程
+def main():
+    import pandas as pd
+    points=pd.read_table(r"ex1data1.txt",sep = ",")
+    x=points[:,0]
+    y=points[:.1]
+    alpha=0.0001
+    first_theta=0
+    first_theta_zero=0
+    number=70
+    theta,theta_zero,cost=tidu(points,first_theta,first_theta_zero,alpha,number)
+    visualiztion_cost(cost)
+    y_zero=theta*x+theta_zero
+    visualization_fitting(x,y,y_zero)
+#执行过程
+if __name__=='__main__':
+   main()
