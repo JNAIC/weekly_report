@@ -1,0 +1,47 @@
+小任务
+jsy 22.11.22
+查找资料：吴恩达机器学习关于线性回归的部分；梯度下降法相关博客
+#线性回归是利用回归方程（函数）对一个或多个自变量（特征值）和因变量（目标值）之间关系进行建模的一种分析方式，目标为找到一条最好的拟合线使得误差最小（也就是代价函数最小）
+# 梯度下降法是一种求解线性回归模型的方法，寻找合适的θ0、θ1使得代价函数J(θ0,θ1)最小，实现步骤为：
+# 1.初始化θ0,θ1
+# 2.不停改变θ0,θ1使J(θ0,θ1)减小
+# 3.找到J(θ0,θ1)的最小值
+#线性方程y=kx+b，其中x和y已知，要找k和b
+import numpy as np
+import matplotlib.pyplot as plt
+#读取群里发的数据集
+data = np.loadtxt('D:\data_xianxinghuigui.txt',delimiter=',')
+#定义x变量和y变量
+x = data[:,0]
+y = data[:,1]
+#定义学习率（即每次梯度下降时的步长）、初始截距b和斜率k、迭代次数（调了好几次。。）
+learning_rate = 0.0001
+b = 0
+k = 0
+n_iterables = 200000
+#代价函数
+def compute_mse(x,y,k,b):
+     mse = np.sum((y-(k*x+b))**2)/len(x)/2#使用均方误差mse作为性能度量标准 为方便求导乘了1/2
+     return mse
+#梯度下降函数，传入刚才的参数，输出结果为目标截距、目标斜率、代价函数值列表
+def gradient_descent(x,y,k,b,learning_rate,n_iterables):
+    m = len(x)
+    start_loss = compute_mse(x,y,k,b)
+    loss_value = [start_loss]
+    for i in range(n_iterables):
+        #求偏导
+        b1 = np.sum((k*x+b)-y)/m
+        k1 = np.sum(((k*x+b)-y)*x)/m
+        #更新b、k（减去偏导乘以学习率）
+        b = b - (learning_rate*b1)
+        k = k - (learning_rate*k1)
+        loss_value.append(compute_mse(x,y,k,b))
+        print(b,k)
+    return b,k,np.array(loss_value)
+#调用函数，然后画图，随迭代次数的增加，代价函数越来越小，最终画出个看得下眼的图
+b1,k1,loss_list = gradient_descent(x,y,k,b,learning_rate,n_iterables)
+y_predict = k1*x+b1
+print(b1,k1)
+plt.scatter(x,y)
+plt.plot(x,y_predict)
+plt.show()
