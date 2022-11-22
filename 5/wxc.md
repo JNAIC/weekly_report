@@ -18,8 +18,10 @@
        1. 假设直线：y=theta0+theta1x
        2. 利用梯度下降法求得theta0,theta1 
            1). 构建一个代价函数：  
-           2). 目标： 将J(theta0,theta1) 的值最小化（利用梯度下降法）
-       3. 实现
+           2). 目标： 将关于(theta0,theta1) 的函数值最小化（利用梯度下降法）
+       3. 注意 1）要是用矩阵相乘，要保持行列数的合理，为此在X矩阵添上 1，1···
+               2）如果是迭代，注意同时更新theta0,theta1的值 
+       4. 实现：
        ```c
          # time :2022/11/20  16:34
          import numpy as np
@@ -72,6 +74,4 @@
        plt.show()
        
        ```
- ps:
-  ![](https://github.com/ccandtt/daily/blob/main/1TH%20First/outcome.png)
          
