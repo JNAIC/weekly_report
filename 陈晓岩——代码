@@ -1,0 +1,58 @@
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 切分训练数据
+filename = "ex1data1.txt"
+x = []
+y = []
+with open(filename, 'r') as lines:
+    for line in lines:
+        xt, yt = [float(i) for i in line.split(',')]
+        x.append(xt)
+        y.append(yt)
+x=np.array(x)
+y=np.array(y)
+plt.scatter(x, y)
+
+
+m=len(x)     # 数据长度
+# 参数设置（可手动更新）
+times=10000   # 迭代次数
+lr=0.001      # 学习率
+k=random.random()   # 初始斜率
+b=random.random()   # 初始截距
+err=[]
+
+# 损失函数
+def loss_func(k,b):
+     y1 = k * x + b  # 函数模型
+     err = np.sum((y1-y)**2)/m  # 计算误差(均方误差MSE)
+     return err
+
+
+# 梯度下降
+for i in range(times):
+    y1 = k * x + b
+    # 更新参数
+    k -= lr*2*np.sum((y1-y)*x)/m
+    b -= lr * 2 * np.sum(y1 - y) / m
+    err.append(loss_func(k, b))
+
+# 绘制模型
+print(f"y = {k:.5f} * x + {b:.5f}")
+y_final=k*x+b
+plt.figure(2)
+plt.scatter(x, y)
+plt.plot(x, y_final, c='g')
+
+
+# 预测
+x_predict = 8
+y_predict = k * x_predict + b
+print("result=",y_predict)
+plt.figure(3)
+plt.scatter(x, y)
+plt.plot(x, y_final, c='g')
+plt.scatter(x_predict, y_predict, c='r', marker='*')    # 红色的‘*’点
+plt.show()
