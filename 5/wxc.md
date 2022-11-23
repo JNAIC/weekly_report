@@ -23,7 +23,7 @@
                2）如果是迭代，注意同时更新theta0,theta1的值 
        4. 实现：
  迭代（纯手搓，就是结果呜呜和那个矩阵的有点小，啊不大差，，theta0偏大,theta1也偏大，增加了迭代次数，好像还不对，不知道为啥）：
- 
+ ```c
    import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
@@ -74,6 +74,7 @@
   ax.set(xlabel='population',
        ylabel='profit')
   plt.show()
+```
 
 矩阵：
        ```c
