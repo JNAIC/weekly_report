@@ -22,6 +22,59 @@
        3. 注意 1）要是用矩阵相乘，要保持行列数的合理，为此在X矩阵添上 1，1···
                2）如果是迭代，注意同时更新theta0,theta1的值 
        4. 实现：
+ 迭代（纯手搓，就是结果呜呜和那个矩阵的有点小，啊不大差，，theta0偏大,theta1也偏大，增加了迭代次数，好像还不对，不知道为啥）：
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv('ex1data1.txt', names=['x', 'y'])
+X = df.iloc[:, 0]
+Y = df.iloc[:, 1]
+X = X.values.tolist()
+Y = Y.values.tolist()
+m = 97
+def innerf1(theta0, theta1):
+    sum = 0
+    for i in range(97):
+        sum= sum + (theta0+theta1*X[i]-Y[i])
+        return sum/m
+def sum1(theta0, theta1, X, Y):
+    sum = 0
+    i = 0
+    for i in range(97):
+        sum= sum + (theta0+theta1*X[i]-Y[i])*X[i]
+        return sum/m
+
+def gradientDescent(theta0, theta1, alpha, X, Y):
+    tmp0 = theta0 - innerf1(theta0,theta1)*alpha
+    tmp1 = theta1 - sum1(theta0,theta1,X,Y)*alpha
+    theta0 = tmp0
+    theta1 = tmp1
+    t = [theta0, theta1]
+    return t
+
+theta0 = 0
+theta1 = 0
+alpha = 0.01
+times = 1500
+for i in range(1500):
+    n = gradientDescent(theta0, theta1, alpha, X, Y)
+    theta0 = n[0]
+    theta1 = n[1]
+
+print(theta0, theta1)
+
+
+x = np.linspace(0, 25, 100)
+y_ = theta0+theta1*x
+fig, ax = plt.subplots()
+ax.scatter(X, Y, label='raw data')
+ax.plot(x, y_, 'r', label='predict outcome')
+ax.legend()
+ax.set(xlabel='population',
+       ylabel='profit')
+plt.show()
+
+矩阵：
        ```c
          # time :2022/11/20  16:34
          import numpy as np
@@ -51,7 +104,7 @@
         def func(X, y, theta, alpha, times):
         costs = []
         for i in range(times):
-        theta = theta - (X.T@(X@theta-y))*alpha/len(X)  # X*theta-y
+        theta = theta - (X.T@(X@theta-y))*alpha/len(X)  # X*theta-y    # 这个相乘的矩阵公式没推出来···
         cost = costf(X, y, theta)
         costs.append(cost)
         return theta, costs  # 返回元组
