@@ -1,3 +1,4 @@
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -26,3 +27,4 @@ print(w,b)
 plt.scatter(x,y,s=50,c='c')
 plt.plot(x,w*x+b)
 plt.show()
+```
