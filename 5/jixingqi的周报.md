@@ -15,6 +15,7 @@ luogu题单暂时未写
 先把课内搞搞，再继续py+kaggle
 
 ## 小任务代码
+```python
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -49,5 +50,5 @@ print(data.head(97))
 plt.scatter(data.x,data.y,s=30,c="b",marker="s")  
 plt.plot(x,y,'black')
 plt.show()
-
+```
 
