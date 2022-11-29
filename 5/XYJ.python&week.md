@@ -5,7 +5,7 @@
 #因为梯度是函数上升最快的方向，所以如果我们要寻找函数的最小值，只需沿着梯度的反方向寻找即可
 
 #小任务(尝试了N次,各种报错)
-
+```python
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -55,3 +55,4 @@ print(b1,k1)
 #最后画图
 plt.scatter(x,y)
 plt.plot(x,y_predict)
+```
